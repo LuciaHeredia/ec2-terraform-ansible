@@ -1,0 +1,7 @@
+- name: Configure EC2 instances
+  hosts: web
+  become: true
+  tasks:
+    - name: Update packages
+      apt:
+        update_cache: yes
