@@ -14,3 +14,16 @@ ec2-terraform-ansible/
 │   └── playbook.yml
 └── README.md
 ```
+## How to use:
+1. Clone this project.
+2. Deploy with Terraform:
+    ```
+    $ cd terraform
+    $ terraform init
+    $ terraform apply -auto-approve
+    $ cd ..
+    ```
+    To destroy all:
+    ```
+    $ terraform destroy
+    ```
