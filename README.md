@@ -16,16 +16,24 @@ This project automates the deployment and configuration of multiple **AWS EC2 in
 ## Folders Structure:
 ```
 ec2-terraform-ansible/
-├── terraform/            # Infrastructure as Code (IaC)
-│   ├── main.tf           # Root terraform file
-│   ├── terraform.tfvars  # Variables to be defined automatically during runtime
+├── terraform/                 # Infrastructure as Code (IaC)
+│   ├── main.tf                # Root terraform file
+│   ├── terraform.tfvars       # Variables to be defined automatically during runtime
 │   ├── variables.tf
-│   └── outputs.tf
+│   ├── outputs.tf
+│   └── generate_inventory.sh  # Connects Terraform to Ansible by generating a dynamic inventory
 ├── ansible/
-│   ├── inventory.ini     # List of EC2 instance IPs
-│   └── playbook.yml
+│   ├── inventory.ini          # List of EC2 instance IPs
+│   └── playbook.yml           # Automates configuration of EC2 instances using Ansible over SSH
 └── README.md
 ```
+
+## Prerequisites:
+* **Terraform** installed.
+* **Ansible** installed.
+* **AWS** credentials configured.
+* *SSH key pair* available (or auto-generated).
+* *jq* installed (used in generate_inventory script).
 
 ## How to use:
 1. Clone this project.
