@@ -1,5 +1,17 @@
-# In process...
 # 📦 AWS EC2 instances with Terraform and Ansible
+This project automates the deployment and configuration of multiple **AWS EC2 instances* using **Terraform** and **Ansible**.
+
+## What It Does:
+1. Provision Infrastructure with **Terraform**:
+    - Creates 3 **EC2 instances** in **AWS**.
+    - Generates and uses an *SSH key pair*.
+    - Optionally applies basic provisioning steps.
+2. Generate **Ansible** Inventory Automatically:
+    - Extracts public IPs of the **EC2 instances**.
+    - Creates a ready-to-use *inventory.ini* file for **Ansible**.
+3. Manage Configuration with **Ansible**:
+    - Connects via *SSH* to configure and manage the **EC2 instances**.
+    - Runs user-defined *playbooks* (e.g., updates, installs).
 
 ## Folders Structure:
 ```
@@ -14,6 +26,7 @@ ec2-terraform-ansible/
 │   └── playbook.yml
 └── README.md
 ```
+
 ## How to use:
 1. Clone this project.
 2. Deploy with Terraform:
