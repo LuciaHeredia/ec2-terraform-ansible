@@ -11,8 +11,8 @@ resource "aws_key_pair" "deployer" {
 
 resource "aws_security_group" "ssh" {
   # using default VPC
-  name        = "allow_ssh"
-  description = "Allow SSH inbound traffic"
+  name        = "allow_ssh_http"
+  description = "Allow SSH and HTTP access"
 
   ingress {
     description = "SSH"
@@ -20,6 +20,14 @@ resource "aws_security_group" "ssh" {
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] # for testing
+  }
+
+  ingress {
+    description = "HTTP"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
@@ -35,6 +43,7 @@ resource "aws_instance" "web" {
   ami           = var.ami_id
   instance_type = var.type_ec2
   key_name      = aws_key_pair.deployer.key_name
+  associate_public_ip_address = true
   vpc_security_group_ids = [aws_security_group.ssh.id]
 
   tags = {
