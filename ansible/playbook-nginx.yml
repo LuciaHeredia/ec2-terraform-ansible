@@ -1,0 +1,30 @@
+- name: Install and configure NGINX on EC2
+  hosts: web
+  become: true
+  tasks:
+    - name: Update apt package cache
+      apt:
+        update_cache: yes
+
+    - name: Install NGINX
+      apt:
+        name: nginx
+        state: present
+
+    - name: Ensure NGINX is running and enabled on boot
+      service:
+        name: nginx
+        state: started
+        enabled: true
+
+    - name: Create custom index.html
+      copy:
+        dest: /var/www/html/index.html
+        content: |
+          <html>
+            <head><title>Welcome</title></head>
+            <body><h1>NGINX deployed by Ansible 🚀</h1></body>
+          </html>
+        owner: www-data
+        group: www-data
+        mode: "0644"
