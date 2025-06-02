@@ -16,15 +16,20 @@ This project automates the deployment and configuration of multiple **AWS EC2 in
 ## Folders Structure:
 ```
 ec2-terraform-ansible/
+│
 ├── terraform/                 # Infrastructure as Code (IaC)
 │   ├── main.tf                # Root terraform file
 │   ├── terraform.tfvars       # Variables to be defined automatically during runtime
 │   ├── variables.tf
 │   ├── outputs.tf
 │   └── generate_inventory.sh  # Connects Terraform to Ansible by generating a dynamic inventory
-├── ansible/
+│
+├── ansible/                   # Automates configuration of EC2 instances using Ansible over SSH
 │   ├── inventory.ini          # List of EC2 instance IPs
-│   └── playbook.yml           # Automates configuration of EC2 instances using Ansible over SSH
+│   ├── playbook.yml           # Updates packages on EC2 instances
+│   └── playbook-nginx.yml     # Installs and configures NGINX on Ubuntu EC2 instances
+│
+├── .gitignore                 
 └── README.md
 ```
 
@@ -43,10 +48,6 @@ ec2-terraform-ansible/
     $ terraform init
     $ terraform apply -auto-approve
     ```
-    To destroy all:
-    ```
-    $ terraform destroy
-    ```
 3. Automatically export IPs for Ansible with Shell script:
     - Make script executable (first time only):
     ```
@@ -61,4 +62,11 @@ ec2-terraform-ansible/
     ```
     $ cd ansible
     $ ansible-playbook -i inventory.ini playbook.yml
+    $ ansible-playbook -i inventory.ini playbook-nginx.yml
+    ```
+5. To destroy all:
+    ```
+    $ cd ..
+    $ cd terraform
+    $ terraform destroy -auto-approve
     ```
