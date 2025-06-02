@@ -6,7 +6,7 @@ resource "aws_key_pair" "deployer" {
   # if u dont have, run: ssh-keygen -t rsa -b 4096 -f ~/.ssh/deployer-key
   # then allow permission: chmod 400 ~/.ssh/deployer-key
   key_name   = "deployer-key"
-  public_key = file("~/.ssh/id_rsa.pub")
+  public_key = file("~/.ssh/deployer-key.pub")
 }
 
 resource "aws_security_group" "ssh" {
@@ -46,7 +46,7 @@ resource "aws_instance" "web" {
     connection {
       type        = "ssh"
       user        = "ubuntu"
-      private_key = file("~/.ssh/id_rsa")
+      private_key = file("~/.ssh/deployer-key")
       host        = self.public_ip
       timeout     = "2m"
     }
