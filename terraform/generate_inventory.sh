@@ -17,6 +17,7 @@ cat <<EOF >> ../ansible/inventory.ini
 [web:vars]
 ansible_user=ubuntu
 ansible_ssh_private_key_file=~/.ssh/deployer-key
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 EOF
 
 echo "✅ Ansible inventory.ini generated."
